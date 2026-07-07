@@ -1,6 +1,6 @@
 # contractility
 
-Manages contracts for the club's race services business, as well as for signature race sponsors. Replaces what used to be a manual Google Sheets workflow.
+Manages contracts for the club's race services business, as well as for signature race sponsors. Replaces what used to be a manual Google Sheets workflow. For the technical/operational side of race timing (chip timing, backup timing, finish-line video) — used here and for the club's own low-key races — see [race-services/](../race-services/).
 
 - Admin site: https://contracts.loutilities.com/
 - Repo: https://github.com/louking/contracts

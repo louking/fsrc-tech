@@ -9,6 +9,7 @@ Manages results received from a Time Machine manual race timer for input to scor
 - Receives results from the [Time Machine](https://timemachine.org/) over Bluetooth, bib numbers scanned from participant bibs, and optionally chip reads from a Trident RFID reader
 - Creates a CSV file which can be read by race scoring software (designed for and tested with RaceDay Scoring)
 - Also runs in "simulator mode" so a prospective scoring operator can practice
+- For chip-timing (Trident) theory, configuration, and race-day operation this app fits into, see [race-services/timing.md](../race-services/timing.md)
 
 ## Tech stack
 

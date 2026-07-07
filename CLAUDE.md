@@ -9,6 +9,7 @@ This is **not a code project** — it's an LLM-oriented wiki documenting the FSR
 - `applications/` — one file per app (scoretility, routetility, contractility, membertility, tmtility, logmon, wordpress-docker). Each covers what the app does, its repo, docs, and public/admin site URLs.
 - `framework/` — the shared python/javascript framework (loutilities, Flask/Jinja2, DataTables, SQLAlchemy, d3js) that most of the apps are built on top of.
 - `infrastructure/` — hosting/server details (DigitalOcean, Rocky Linux, docker-compose) and dev tooling.
+- `race-services/` — the technical/operational side of FSRC's race timing: chip timing, backup timing, finish-line video, used both for outside races FSRC contracts to time and the low-key/informal races it offers its own members. The counterpart to contractility's contract/business side (which only covers the contracted-race half). Unlike `applications/`/`framework/`/`infrastructure/`, this covers third-party hardware/software (Trident, RaceDay Scoring, Blue Iris) that FSRC didn't build but depends on and configures.
 - `GLOSSARY.md` — FSRC/domain-specific jargon (Grand Prix, Equalizer, interest, RunSignup, etc.), kept sorted alphabetically. Add a term here when a page uses club- or domain-specific vocabulary an LLM wouldn't already know; don't duplicate generic software terms, which are linked inline instead.
 
 Keep new content organized by topic in these folders rather than as one flat pile of notes — that's the whole point of this repo.
@@ -23,13 +24,19 @@ Each topic folder has its own `README.md` acting as an index (linking to the fil
 
 Several of the repos (e.g. `members`, `loutilities`, `caddy-docker`) have their own `CLAUDE.md` with real architecture detail, gotchas, and patterns — check for one before writing from scratch. Pull the high-value parts (tech stack, architecture notes, known gotchas, key classes/modules) into the corresponding page here, but link to the repo's own `CLAUDE.md`/docs as the authoritative source rather than duplicating it in full — it'll drift out of sync otherwise. When a repo has no `CLAUDE.md`, reading the actual source (e.g. via `gh api repos/<owner>/<repo>/contents/<path>` or `WebFetch` on the raw GitHub URL) to find key classes/modules and their docstrings works well too — that's how `framework/loutilities.md` was built. This pattern isn't limited to `applications/`/`framework/` pages — `infrastructure/caddy.md` was built the same way from the `caddy-docker` repo.
 
+## Deepening a race-services page
+
+`race-services/` pages document third-party hardware/software (Trident, RaceDay Scoring, Blue Iris, etc.) that FSRC didn't build, so there's no repo `CLAUDE.md` or source code to pull from. Instead these are seeded from Lou's own operational Google Docs (race-day configuration/procedure notes) — find and link the source doc the same way `race-services/timing.md` links [Chip Timing Configuration and Operation](https://docs.google.com/document/d/1utAcupx2zqPyF6dONEBtDsQsB651qulztP_W2txLqsc/edit?usp=sharing), condensing rather than duplicating it verbatim.
+
+**Fetching a Google Doc's actual content**: `WebFetch` on a `docs.google.com/document/d/<id>/edit` URL only returns the editor chrome, not the body. Use the export endpoint instead — `.../export?format=txt` (follow the redirect it returns to a `googleusercontent.com` URL) gives the plain body text, but **silently strips all hyperlinks**, leaving only visible anchor text (e.g. a "References" list becomes bare titles with no way to tell they were ever links). If the doc has citation/reference links worth preserving, re-fetch with `format=html` instead and ask for the `href`/`q=` targets explicitly — that's how the real URLs for `race-services/timing.md`'s References section were recovered after the txt export had silently dropped them.
+
 ## Terminology
 
 Prefer FSRC-facing product names over the underlying framework/platform name: "FSRC Community" or "FSRC Community forum", not "Discourse"; "steeplechasers.org", not "WordPress". The framework name is fine (and often necessary) when the content is actually about the technical integration — API details, config keys, architecture notes, gotchas — just not as the everyday way of referring to the thing. See `GLOSSARY.md` for the FSRC Community entry.
 
 ## Voice: don't attribute to "Lou" inside technical content
 
-Architecture notes and gotcha bullets (in `applications/`, `framework/`, `infrastructure/`) are written in passive/technical voice describing the system's behavior — no "Lou added X" / "Lou fixed Y". Reserve naming Lou by name for framing-level content only: the root `README.md`/`CLAUDE.md` statements of ecosystem ownership, and `CHANGELOG.md` entries about his personal tooling/workflow choices (e.g. "Cursor is now Lou's primary dev editor").
+Architecture notes and gotcha bullets (in `applications/`, `framework/`, `infrastructure/`, `race-services/`) are written in passive/technical voice describing the system's behavior — no "Lou added X" / "Lou fixed Y". Reserve naming Lou by name for framing-level content only: the root `README.md`/`CLAUDE.md` statements of ecosystem ownership, and `CHANGELOG.md` entries about his personal tooling/workflow choices (e.g. "Cursor is now Lou's primary dev editor").
 
 ## License
 
@@ -44,3 +51,5 @@ In this environment, `git commit -m "$(cat <<'EOF' ... EOF)"` (heredoc-in-comman
 The actual application code lives in separate repos under https://github.com/louking/ (rrwebapp, runningroutes, contracts, members, tm-csv-connector, logmon, loutilities, wordpress-docker, caddy-docker). This repo only holds descriptive/reference content, not the app source.
 
 The initial content was seeded from Lou's own overview doc, [FSRC Technology Software Overview](https://docs.google.com/document/d/1Gvoy-4-_305eKA3BszSJPyQpVuOmsV4hLmKKKOxmEUk/edit?usp=sharing), which he uses as the starting point when explaining the FSRC tech stack to someone new.
+
+`race-services/` is the first exception to the "code repos + one overview doc" pattern above: it documents third-party race-day tech FSRC configures but didn't build, seeded from separate operational Google Docs Lou maintains (not a code repo) — see the "Deepening a race-services page" section above. This is also the first instance of the broader, not-yet-fully-scoped expansion (agreed 2026-07-07) to eventually cover other third-party tech FSRC depends on, e.g. Google Workspace.

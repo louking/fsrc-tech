@@ -7,6 +7,7 @@ This repo is a knowledge base about the technology that powers the Frederick Ste
 - [applications/](applications/) — the individual apps (scoretility, routetility, contractility, membertility, tmtility, logmon, wordpress-docker)
 - [framework/](framework/) — the shared python/javascript framework (loutilities, Flask/Jinja2, DataTables, SQLAlchemy, d3js) that most apps are built on
 - [infrastructure/](infrastructure/) — hosting, docker-compose, and server details
+- [race-services/](race-services/) — the technical/operational side of FSRC's race timing (chip timing, backup timing, finish-line video), covering both contracted outside races and the club's own low-key races
 - [GLOSSARY.md](GLOSSARY.md) — FSRC- and running-club-specific terms (Grand Prix, interest, RunSignup, etc.)
 
 ## Source

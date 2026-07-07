@@ -1,0 +1,5 @@
+# Race Services
+
+FSRC runs a race-timing services business: outside race directors contract FSRC to time and score their races. The same timing setup also covers the low-key/informal races FSRC offers its own members. [contractility](../applications/contractility.md) manages the contracted-race business side (contracts and sponsor agreements); this section covers the technical/operational side — how a race actually gets timed and scored on race day, contracted or not.
+
+- [timing.md](timing.md) — chip timing (Trident) theory of operation, configuration, and race-day operation, plus the Time Machine manual backup timer feeding [tmtility](../applications/tmtility.md)
