@@ -4,6 +4,8 @@ A running log of notable updates to this wiki. Newest entries at the top.
 
 ## 2026-07-07
 
+- Updated `infrastructure/hosting.md`: Cursor (not VS Code) is now Lou's primary dev editor.
+- Added `infrastructure/caddy.md`: covers Caddy, the dockerized edge reverse proxy (github.com/louking/caddy-docker) that runs on the server and for local development — stack (caddy + certbot for CDN cert renewal), dev vs. production Caddyfile, deployment via Fabric, and the HTTP/3-disabled gotcha. Linked from `infrastructure/hosting.md` and `infrastructure/README.md`.
 - Added `framework/loutilities.md`: deepened writeup of `loutilities`, covering `tables.py` (DataTables/Editor CRUD-grid integration: `CrudApi`, `DbCrudApi`, `DataTablesEditor`, field-type helpers, etc.) and `user/` (shared accounts/roles/multi-app SSO: models, role catalog, admin views, file uploads). Sourced from the repo's own `CLAUDE.md` plus direct inspection of `tables.py` and `user/*.py`.
 - Updated `framework/overview.md` and `framework/README.md` to point to the new page.
 - Added `xtility` glossary entry explaining the "-tility" app-suite naming convention.

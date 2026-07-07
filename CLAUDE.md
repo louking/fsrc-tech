@@ -19,9 +19,9 @@ Each topic folder has its own `README.md` acting as an index (linking to the fil
 
 `CHANGELOG.md` tracks notable updates to this wiki (newest entries first). Add an entry there whenever you add or meaningfully change content.
 
-## Deepening an app's (or framework's) page
+## Deepening an app's (or framework's, or infrastructure component's) page
 
-Several of the repos (e.g. `members`, `loutilities`) have their own `CLAUDE.md` with real architecture detail, gotchas, and patterns — check for one before writing from scratch. Pull the high-value parts (tech stack, architecture notes, known gotchas, key classes/modules) into the corresponding page here, but link to the repo's own `CLAUDE.md`/docs as the authoritative source rather than duplicating it in full — it'll drift out of sync otherwise. When a repo has no `CLAUDE.md`, reading the actual source (e.g. via `gh api repos/<owner>/<repo>/contents/<path>` or `WebFetch` on the raw GitHub URL) to find key classes/modules and their docstrings works well too — that's how `framework/loutilities.md` was built.
+Several of the repos (e.g. `members`, `loutilities`, `caddy-docker`) have their own `CLAUDE.md` with real architecture detail, gotchas, and patterns — check for one before writing from scratch. Pull the high-value parts (tech stack, architecture notes, known gotchas, key classes/modules) into the corresponding page here, but link to the repo's own `CLAUDE.md`/docs as the authoritative source rather than duplicating it in full — it'll drift out of sync otherwise. When a repo has no `CLAUDE.md`, reading the actual source (e.g. via `gh api repos/<owner>/<repo>/contents/<path>` or `WebFetch` on the raw GitHub URL) to find key classes/modules and their docstrings works well too — that's how `framework/loutilities.md` was built. This pattern isn't limited to `applications/`/`framework/` pages — `infrastructure/caddy.md` was built the same way from the `caddy-docker` repo.
 
 ## Terminology
 
@@ -37,6 +37,6 @@ In this environment, `git commit -m "$(cat <<'EOF' ... EOF)"` (heredoc-in-comman
 
 ## Source material
 
-The actual application code lives in separate repos under https://github.com/louking/ (rrwebapp, runningroutes, contracts, members, tm-csv-connector, logmon, loutilities, wordpress-docker). This repo only holds descriptive/reference content, not the app source.
+The actual application code lives in separate repos under https://github.com/louking/ (rrwebapp, runningroutes, contracts, members, tm-csv-connector, logmon, loutilities, wordpress-docker, caddy-docker). This repo only holds descriptive/reference content, not the app source.
 
 The initial content was seeded from Lou's own overview doc, [FSRC Technology Software Overview](https://docs.google.com/document/d/1Gvoy-4-_305eKA3BszSJPyQpVuOmsV4hLmKKKOxmEUk/edit?usp=sharing), which he uses as the starting point when explaining the FSRC tech stack to someone new.
