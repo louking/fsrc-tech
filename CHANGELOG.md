@@ -4,6 +4,7 @@ A running log of notable updates to this wiki. Newest entries at the top.
 
 ## 2026-07-07
 
+- Deepened the remaining application pages: `applications/routetility.md` and `applications/contractility.md` (tech stack, architecture, gotchas from their repos' own `CLAUDE.md`), `applications/tmtility.md` (hardware/client architecture, simulation mode, release pipeline, from `tm-csv-connector`'s `CLAUDE.md`), `applications/logmon.md` (services, background threads, two-database layout, from `logmon`'s `CLAUDE.md`), and `applications/wordpress-docker.md` (stack, deployment, gotchas, built directly from `docker-compose.yml`/`fabfile.py` since that repo has no `CLAUDE.md`). All apps now have deepened pages.
 - Deepened `applications/scoretility.md`: added tech stack, architecture notes (blueprints, external results import, CRUD views, Celery queues, age grade models), and gotchas, sourced from the `rrwebapp` repo's own `CLAUDE.md`. Notes that scoretility predates the [interest](GLOSSARY.md) multi-tenancy model — it scopes clubs via `session['club_id']`/`session['year']` instead.
 - Updated `infrastructure/hosting.md`: Cursor (not VS Code) is now Lou's primary dev editor.
 - Added `infrastructure/caddy.md`: covers Caddy, the dockerized edge reverse proxy (github.com/louking/caddy-docker) that runs on the server and for local development — stack (caddy + certbot for CDN cert renewal), dev vs. production Caddyfile, deployment via Fabric, and the HTTP/3-disabled gotcha. Linked from `infrastructure/hosting.md` and `infrastructure/README.md`.
