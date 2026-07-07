@@ -2,7 +2,7 @@
 
 ## What this repo is
 
-This is **not a code project** — it's an LLM-oriented wiki documenting the FSRC Technology ecosystem: the software Lou King has built and maintains for the Frederick Steeplechasers Running Club (FSRC). There is no build, test, or lint step here; changes are just markdown edits.
+This is **not a code project** — it's an LLM-oriented wiki documenting the FSRC Technology ecosystem: the technology that powers the Frederick Steeplechasers Running Club (FSRC), built and maintained by Lou King and licensed to the club for free use in perpetuity. There is no build, test, or lint step here; changes are just markdown edits.
 
 ## Structure
 
@@ -26,6 +26,10 @@ Several of the repos (e.g. `members`, `loutilities`, `caddy-docker`) have their 
 ## Terminology
 
 Prefer FSRC-facing product names over the underlying framework/platform name: "FSRC Community" or "FSRC Community forum", not "Discourse"; "steeplechasers.org", not "WordPress". The framework name is fine (and often necessary) when the content is actually about the technical integration — API details, config keys, architecture notes, gotchas — just not as the everyday way of referring to the thing. See `GLOSSARY.md` for the FSRC Community entry.
+
+## Voice: don't attribute to "Lou" inside technical content
+
+Architecture notes and gotcha bullets (in `applications/`, `framework/`, `infrastructure/`) are written in passive/technical voice describing the system's behavior — no "Lou added X" / "Lou fixed Y". Reserve naming Lou by name for framing-level content only: the root `README.md`/`CLAUDE.md` statements of ecosystem ownership, and `CHANGELOG.md` entries about his personal tooling/workflow choices (e.g. "Cursor is now Lou's primary dev editor").
 
 ## License
 
