@@ -1,0 +1,18 @@
+# FSRC Technology Wiki
+
+This repo is a knowledge base about the software Lou King has built and maintains for the Frederick Steeplechasers Running Club (FSRC). It's organized by topic so both humans and LLMs can quickly find context on a given application, the shared framework it's built on, or how everything is hosted.
+
+## Contents
+
+- [applications/](applications/) — the individual apps (scoretility, routetility, contractility, membertility, tmtility, logmon, wordpress-docker)
+- [framework/](framework/) — the shared python/javascript framework (loutilities, Flask/Jinja2, DataTables, SQLAlchemy, d3js) that most apps are built on
+- [infrastructure/](infrastructure/) — hosting, docker-compose, and server details
+- [GLOSSARY.md](GLOSSARY.md) — FSRC- and running-club-specific terms (Grand Prix, interest, RunSignup, etc.)
+
+## Source
+
+Much of the initial content here is derived from Lou's own overview doc: [FSRC Technology Software Overview](https://docs.google.com/document/d/1Gvoy-4-_305eKA3BszSJPyQpVuOmsV4hLmKKKOxmEUk/edit?usp=sharing)
+
+## License
+
+The written content in this repo is licensed under [CC BY-SA 4.0](LICENSE). This does not apply to the application source code, which lives (and is licensed) in its own separate repos.
