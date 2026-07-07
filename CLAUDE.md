@@ -31,6 +31,10 @@ Prefer FSRC-facing product names over the underlying framework/platform name: "F
 
 Written content here is under `LICENSE` (CC BY-SA 4.0) — a documentation license, not a software one. This is separate from and does not apply to the application source code in the individual app repos, which have their own (Apache-2.0) licensing.
 
+## Git commit messages
+
+In this environment, `git commit -m "$(cat <<'EOF' ... EOF)"` (heredoc-in-command-substitution) has hung indefinitely rather than completing. Write the message to a temp file and use `git commit -F <file>` instead — reliable, and sidesteps quoting/heredoc issues entirely.
+
 ## Source material
 
 The actual application code lives in separate repos under https://github.com/louking/ (rrwebapp, runningroutes, contracts, members, tm-csv-connector, logmon, loutilities, wordpress-docker). This repo only holds descriptive/reference content, not the app source.
