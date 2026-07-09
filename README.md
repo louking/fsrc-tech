@@ -1,19 +1,10 @@
 # FSRC Technology Wiki
 
-This repo is a knowledge base about the technology that powers the Frederick Steeplechasers Running Club (FSRC) — built and maintained by Lou King, and licensed to the club for free use in perpetuity. It's organized by topic so both humans and LLMs can quickly find context on a given application, the shared framework it's built on, or how everything is hosted.
+An LLM-oriented wiki documenting the FSRC Technology ecosystem — the technology that powers
+the Frederick Steeplechasers Running Club (FSRC), built and maintained by Lou King and
+licensed to the club for free use in perpetuity.
 
-## Contents
+The content lives in [docs/](docs/) (published via MkDocs Material) — start at
+[docs/README.md](docs/README.md).
 
-- [applications/](applications/) — the individual apps (scoretility, routetility, contractility, membertility, tmtility, logmon, wordpress-docker)
-- [framework/](framework/) — the shared python/javascript framework (loutilities, Flask/Jinja2, DataTables, SQLAlchemy, d3js) that most apps are built on
-- [infrastructure/](infrastructure/) — hosting, docker-compose, and server details
-- [race-services/](race-services/) — the technical/operational side of FSRC's race timing (chip timing, backup timing, finish-line video), covering both contracted outside races and the club's own low-key races
-- [GLOSSARY.md](GLOSSARY.md) — FSRC- and running-club-specific terms (Grand Prix, interest, RunSignup, etc.)
-
-## Source
-
-Much of the initial content here is derived from Lou's own overview doc: [FSRC Technology Software Overview](https://docs.google.com/document/d/1Gvoy-4-_305eKA3BszSJPyQpVuOmsV4hLmKKKOxmEUk/edit?usp=sharing)
-
-## License
-
-The written content in this repo is licensed under [CC BY-SA 4.0](LICENSE). This does not apply to the application source code, which lives (and is licensed) in its own separate repos.
+See [CLAUDE.md](CLAUDE.md) for how this repo is organized and maintained.
