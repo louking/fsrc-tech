@@ -1,0 +1,10 @@
+/* Give the last column of a table more room -- currently only affects the
+   race-timing summary table (race-services/reports/README.md), whose Notes
+   column was wrapping long free text into many narrow lines and inflating
+   row height. Scoped by :last-child rather than a class since markdown
+   tables have no per-column hooks; revisit if a future table's last column
+   shouldn't get this treatment. */
+.md-typeset table:not([class]) th:last-child,
+.md-typeset table:not([class]) td:last-child {
+  min-width: 16em;
+}

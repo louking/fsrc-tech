@@ -6,6 +6,8 @@ This is **not a code project** — it's an LLM-oriented wiki documenting the FSR
 
 The wiki content is published via MkDocs Material to `wiki.steeplechasers.org`. `mkdocs.yml` (repo root) points `docs_dir` at `docs/` — **all wiki content lives under `docs/`, not at the repo root.** This is a hard MkDocs requirement, not a style choice: MkDocs rejects a config where `docs_dir` is the same directory as (or any ancestor of) `mkdocs.yml` itself, with the error `Config value 'docs_dir': The 'docs_dir' should not be the parent directory of the config file`. The repo was restructured into this layout for exactly that reason — don't move content back to the root. The remaining server-side rollout (GitHub Actions workflow, deploy user, Caddy volume/config) isn't wired up yet; the in-progress plan (and gotchas already hit) lives in `local-notes/mkdocs-operational-setup.md`, git-ignored and not part of the published wiki.
 
+`mkdocs.yml` also sets `extra_css: [stylesheets/extra.css]` (`docs/stylesheets/extra.css`) for small styling tweaks the Material theme/markdown alone can't do — currently just widening a table's last column (`race-services/reports/README.md`'s Notes column, which was wrapping long free text into tall rows) via a `.md-typeset table:not([class]) td:last-child` rule. It's scoped by `:last-child` rather than a class since markdown tables have no per-column hooks, and applies site-wide — fine while this is still the only table in the wiki, but reconsider the selector if a future table's last column shouldn't get the same treatment. No `nav:` is configured, so MkDocs auto-generates navigation from the file tree, using each page's front-matter `title` (if set) in preference to its first heading.
+
 ## Structure
 
 - `docs/` — everything MkDocs publishes. `docs/README.md` is the wiki's actual homepage (content, not a GitHub landing page — see below).
@@ -54,6 +56,10 @@ Written content here is under `LICENSE` (CC BY-SA 4.0) — a documentation licen
 ## Git commit messages
 
 In this environment, `git commit -m "$(cat <<'EOF' ... EOF)"` (heredoc-in-command-substitution) has hung indefinitely rather than completing. Write the message to a temp file and use `git commit -F <file>` instead — reliable, and sidesteps quoting/heredoc issues entirely.
+
+## Slow git commands after a local `.venv` exists
+
+Once a `.venv/` (e.g. for MkDocs, see below) exists in this repo, plain `git status`/`git mv` calls have taken several minutes instead of being near-instant — observed repeatedly in this environment, cause unconfirmed (not OneDrive — this path isn't under OneDrive, and `Documents` isn't redirected there — so likely antivirus/Defender or some other real-time scanner reacting to the venv's thousands of small files, even though `.venv/` is gitignored). Don't assume a hung git command is broken or retry it; run it with `run_in_background` and wait rather than killing/repeating it.
 
 ## Markdown checklists
 

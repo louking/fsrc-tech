@@ -2,6 +2,13 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-07-09
+
+- Added `race-services/reports/` — sanitized per-race chip-timing reports and a running cross-race summary, published from [chip-timing-analysis](https://github.com/louking/chip-timing-analysis)'s `reports/` output (aggregate-only, no bibs/names/race identity). Published the first entry, the 2026-07-04 5K. Linked from `race-services/README.md`.
+- Refined `race-services/reports/`: each per-race report page now sets a `title` front-matter so the wiki nav shows the race date (not a generic heading) once there are many of these; the summary index (`README.md`) is retitled "Timing Summary", lists most-recent race first, drops the rarely-used "No Chip" column in favor of folding it into a short Notes cell when it happens, and truncates Notes generally so mkdocs-material's table doesn't blow up vertically wrapping long text.
+- Fixed the Indy 5000 report's headline "chips not read at finish" count (was 4, now 3) and its % missed figure (2.3% → 1.8%): a confirmed drop (started, did not finish) has no finish read by definition and isn't a chip-reading miss, so it's no longer counted against these metrics — reported instead as its own "confirmed drop" line.
+- Added `docs/stylesheets/extra.css` (wired via `mkdocs.yml`'s `extra_css`) to widen the last column of tables, so the timing-summary's Notes column doesn't wrap long text into tall rows.
+
 ## 2026-07-08
 
 - Updated `applications/tmtility.md` and `race-services/timing.md`: tmtility's results view now shows the race Start Time (auto-populated from the live Trident `GUNTIME` marker, as already documented) for on-site verification during a race.
