@@ -44,40 +44,13 @@ Time Machine (TM) serves as the finish-line backup stream. RDS ignores backup-st
 
 ### RaceDay Scoring: per-race setup checklist
 
-Run through this for every race, whether **(chip)** or **(scoring)**-only (see [above](#chip-vs-scoring-only-races)):
+Run through the [Chip/Scoring RaceDay Scoring Checklist](https://docs.google.com/spreadsheets/d/1GcDuB508jKu_kdMXZ8VhzIaZk6LE2l4qIxwpstLUKIc/edit?usp=sharing) for every race, whether **(chip)** or **(scoring)**-only (see [above](#chip-vs-scoring-only-races)) — it's the authoritative, field-by-field walkthrough (RunSignup import → Scored Events → Timing Locations → Streams → Sync/participants → Age Groups & Awards → Data Checks → Reports → Wrap-up), link-shareable to anyone with the URL.
 
-**Import the race** (Manage Races):
-- Already listed & Upcoming: click through to the race dashboard.
-- Already listed & Passed: click RENEW, open the dashboard, then clear the old bib/chip cross-reference.
-- Not listed yet: "Import a Race Already on RunSignup" → filter by date → select the race → import the latest backup from RunSignup if appropriate.
-
-**Scored Events** (Quick Setup first, if new):
-- Basic Info: Min Elapsed Finish Time Allowed — 14 min (5K), 30 min (10K), 50 min (10M); **(chip)** sorted by Chip Time.
-- Times: Approx Start Time defaults to the RunSignup time; Actual Start Time is left blank **(chip)** — auto-set from the `GUNTIME` marker — or set explicitly to the race start time **(scoring)**; Max Chip Start Time Offset 2 min **(chip)**.
-- Timing Locations: **(chip)** `Start/Finish` for both start and finish roles, Default Finish Occurrence 2; **(scoring)** "Not a timed start" / `Finish`, Default Finish Occurrence 1.
-
-**Timing Locations settings**:
-- Name: `Start/Finish` **(chip)** or `Finish` **(scoring)** — delete the Start location if RDS created one for a scoring-only race.
-- Types of times: Start & Finish/Split Times **(chip)** or Finish and/or Split Times **(scoring)**.
-- Which Streams: Main = Trident UHF8 A Direct **(chip only)**; Backup = Time Machine-FILE + Trident File-FILE **(chip)**, or Time Machine-FILE alone **(scoring)**.
-- Start/Finish read-time windows are set here but effectively overridden by the Scored Events settings above.
-- Max Number of Occurrences: 2 **(chip)** or 1 **(scoring)**; Gap Factor (occurrence 1): 14/30/50 min by distance, same scale as Min Elapsed Finish Time.
-- Marker Reads **(chip)**: map each race distance's `GUNTIME` to that distance's Start Time, with Auto Update Actual Start Time enabled — this is what lets Actual Start Time populate itself from the live Trident feed.
-
-**Streams**:
-- Trident **(chip only)**: name `Trident UHF8 A`, type Direct Connect, reader name `FSRC_UHF8_A`, IP `192.168.0.101` port `10001`, assigned as Main to `Start/Finish`, read dates reset to the race date.
-- Time Machine: name `Time Machine`, type File, folder `C:\Users\fsrck\Documents\tm-data`, extension `csv`, passing format `[IGNORE],[BIBCODE],[TIME]`, comma-delimited, assigned as Backup (`Start/Finish` **(chip)** or `Finish` **(scoring)**), read dates reset to the race date.
-- Trident File **(chip only, a second backup stream alongside Time Machine)**: name `Trident File`, type Trident File, folder `C:\Users\fsrck\Documents\trident-data`, extension `log`, assigned as Backup to `Start/Finish`, read dates reset to the race date.
-
-**Sync & participants**: if participant/group sync isn't already configured for the race (check Sync Settings), set it up and save as the default. Import chip assignments via Participants → Setup Chip Auto-Assignment (bib/chip headings) — mirrored in tmtility's Chips → Chip/Bib Map. Verify the mapping by scanning chipped bibs and checking RDS Home → Raw Reads (or tmtility's Chips → Chip Reads).
-
-**Age groups & awards**: set age groups per event, then add an "Overall" top-finishers band scored by gun time (1 winner per gender, or as appropriate), with double-dipping removal so overall winners are pulled from age-group results.
-
-**Data checks**: sanity-check the age-grade cutoff used in Suspicious Times against previous years' results for the same race. A saved "Time Machine - Used" filter (Stream Name == Time Machine-FILE, Used == Yes) on Raw Reads shows which finishers actually scored off the backup stream.
-
-**Reports**: set the Overall Report to autosave to RunSignup, with RSU-calculated age grade shown and Gender Place sent as a whole number; add Gender Place and Chip Time columns for on-screen review **(chip)**. When age groups are set up, build a per-event Age Group Winner Report (age-group sections, filtered to award winners only).
-
-**Wrap-up**: send a full backup of the race to RunSignup from the RDS Home top bar.
+A few stable configuration values worth having on hand without opening the sheet:
+- Trident stream (**chip only**): Direct Connect, reader `FSRC_UHF8_A`, IP `192.168.0.101` port `10001`.
+- Time Machine stream: File type, folder `C:\Users\fsrck\Documents\tm-data`, extension `csv`, passing format `[IGNORE],[BIBCODE],[TIME]`, comma-delimited.
+- Trident File backup stream (**chip only**, alongside Time Machine): File type, folder `C:\Users\fsrck\Documents\trident-data`, extension `log`.
+- Min Elapsed Finish Time Allowed / Gap Factor scale by distance: 14 min (5K), 30 min (10K), 50 min (10M).
 
 ### tmtility
 

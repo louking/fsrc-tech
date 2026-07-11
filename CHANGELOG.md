@@ -2,6 +2,18 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-07-11
+
+- Migrated the wiki's build tooling from `mkdocs` + `mkdocs-material` to [Zensical](https://zensical.org), the Material for MkDocs team's successor static site generator. Prompted by the team's [MkDocs 2.0 warning](https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/): MkDocs 2.0 removes the plugin system and rewrites theming with no migration path, which will break Material for MkDocs, now in maintenance mode. Zensical reads this repo's `mkdocs.yml` natively — no config changes needed since the site uses no plugins beyond `extra_css`. `mkdocs`/`mkdocs-material`/etc. uninstalled from the local `.venv`, `zensical` installed in their place; `local-notes/mkdocs-operational-setup.md` updated to the new commands (`zensical build`/`zensical serve`) and package name.
+- Settled on `fsrc-tech.steeplechasers.org` as the wiki's domain (was tentatively `wiki.steeplechasers.org`); updated `mkdocs.yml`'s `site_url`, `CLAUDE.md`, and `local-notes/mkdocs-operational-setup.md` accordingly.
+- `docs/stylesheets/extra.css`: the race-timing summary table's Notes column now clamps to two lines (`-webkit-line-clamp`) instead of just being widened, so a long note can no longer inflate row height; also widened the column further (16em → 28em) since two lines at the old width was still cutting notes off too early.
+- `local-notes/mkdocs-operational-setup.md`: added a production-parity local testing step using a local `caddy-docker` instance (separate `.env`/`docker-compose.yml` from production) serving `fsrc-tech.localhost` from the repo checkout's `site/` build output, plus a day-to-day workflow step to verify via it before pushing. Corrected its `caddy trust` note: that command only installs the CA root into the trust store of whatever OS runs it, and Caddy runs inside the container, so it has to be run against the container's mounted data volume and the resulting cert imported into Windows' trust store directly, not run as `caddy trust` against the container.
+- `race-services/timing.md`: condensed the "RaceDay Scoring: per-race setup checklist" section, which had grown into a near-verbatim field-by-field transcription of the source [Chip/Scoring RaceDay Scoring Checklist](https://docs.google.com/spreadsheets/d/1GcDuB508jKu_kdMXZ8VhzIaZk6LE2l4qIxwpstLUKIc/edit?usp=sharing) sheet, down to a short pointer at that sheet plus the handful of config values (Trident/Time Machine stream IPs, folder paths, distance-based time limits) worth having on the page without opening it. Confirmed the sheet is link-shareable to anyone with the URL, not access-restricted as assumed going in.
+
+## 2026-07-10
+
+- Published the Parkway Panda 5K (2026-05-25) sanitized report to `race-services/reports/`. Notable: 12 participants ran without a chip assigned (a batch of bibs went out without one attached) and were timed entirely via the Time Machine backup stream — not a chip-reading failure. Updated `reports/README.md`'s running summary.
+
 ## 2026-07-09
 
 - Added `race-services/reports/` — sanitized per-race chip-timing reports and a running cross-race summary, published from [chip-timing-analysis](https://github.com/louking/chip-timing-analysis)'s `reports/` output (aggregate-only, no bibs/names/race identity). Published the first entry, the 2026-07-04 5K. Linked from `race-services/README.md`.
