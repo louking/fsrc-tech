@@ -30,3 +30,4 @@ jobs:
           source: "site/"
           target: /var/www/fsrc-tech/
           strip_components: 0
+          debug: true

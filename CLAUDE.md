@@ -59,6 +59,23 @@ Written content here is under `LICENSE` (CC BY-SA 4.0) — a documentation licen
 
 In this environment, `git commit -m "$(cat <<'EOF' ... EOF)"` (heredoc-in-command-substitution) has hung indefinitely rather than completing. Write the message to a temp file and use `git commit -F <file>` instead — reliable, and sidesteps quoting/heredoc issues entirely.
 
+## Pushing changes to `.github/workflows/`
+
+GitHub rejects a push that creates or updates any file under `.github/workflows/` (e.g.
+`deploy.yml`) if it's authenticated with a Personal Access Token that lacks the `workflow`
+scope — a restriction independent of normal repo write access:
+
+```
+! [remote rejected] main -> main (refusing to allow a Personal Access Token to create or
+update workflow `.github/workflows/deploy.yml` without `workflow` scope)
+```
+
+Fix depends on the credential helper in use: `gh auth refresh -h github.com -s workflow` if
+`gh` is the credential helper; otherwise edit the token at `github.com/settings/tokens` (classic)
+or `github.com/settings/tokens?type=beta` (fine-grained, needs "Workflows: Read and write") to
+add the scope, then retry the push — no other change needed, the token value itself doesn't
+change.
+
 ## Slow git commands after a local `.venv` exists
 
 Once a `.venv/` (e.g. for Zensical, see below) exists in this repo, plain `git status`/`git mv` calls have taken several minutes instead of being near-instant — observed repeatedly in this environment, cause unconfirmed (not OneDrive — this path isn't under OneDrive, and `Documents` isn't redirected there — so likely antivirus/Defender or some other real-time scanner reacting to the venv's thousands of small files, even though `.venv/` is gitignored). Don't assume a hung git command is broken or retry it; run it with `run_in_background` and wait rather than killing/repeating it.
