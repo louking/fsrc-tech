@@ -1,6 +1,6 @@
 # FSRC Technology Wiki
 
-This repo is a knowledge base about the technology that powers the Frederick Steeplechasers Running Club (FSRC) — built and maintained by Lou King, and licensed to the club for free use in perpetuity. It's organized by topic so both humans and LLMs can quickly find context on a given application, the shared framework it's built on, or how everything is hosted.
+This wiki is a knowledge base about the technology that powers the Frederick Steeplechasers Running Club (FSRC) — built and maintained by Lou King and others, and licensed to the club for free use in perpetuity. It's organized by topic so both humans and LLMs can quickly find context on a given application, the shared framework it's built on, or how everything is hosted.
 
 ## Contents
 
@@ -16,4 +16,4 @@ Much of the initial content here is derived from Lou's own overview doc: [FSRC T
 
 ## License
 
-The written content in this repo is licensed under [CC BY-SA 4.0](../LICENSE). This does not apply to the application source code, which lives (and is licensed) in its own separate repos.
+The written content in this wiki is licensed under [CC BY-SA 4.0](../LICENSE). This does not apply to the application source code, which lives (and is licensed) in their own separate repos.
