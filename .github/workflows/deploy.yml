@@ -1,0 +1,32 @@
+name: Deploy Wiki
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build site
+        run: zensical build
+
+      - name: Deploy to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: fsrc-deploy
+          key: ${{ secrets.DEPLOY_KEY }}
+          source: "site/"
+          target: /var/www/fsrc-tech/
+          strip_components: 0
