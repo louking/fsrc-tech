@@ -4,6 +4,8 @@ A running log of notable updates to this wiki. Newest entries at the top.
 
 ## 2026-07-13
 
+- Fix summary legend, add # participants to report
+- Added legend to `race-services/reports/`
 - Added `org-tech/`, a new top-level topic covering third-party tech supporting general club operations (Google Workspace for Nonprofits, MailChimp, Facebook and the in-progress migration to FSRC Community) — the first real instance of the broader "other third-party tech" expansion this wiki's `CLAUDE.md` flagged as agreed-but-not-yet-scoped back on 2026-07-07. Seeded from Lou's [Digital Access and Identity Policy](https://docs.google.com/document/d/1dxsT7itCPQ_iHNLq_rNajqF9Ry72GxwGo9QmAflob4U/preview) (approved 2026-04-13) and a June 2026 [member communications survey](https://docs.google.com/presentation/d/1d6UbXKCqowknwfKrcoBn2PuCpGTy01scSH2YXnBV2VY/preview) (196 responses) on Facebook vs. forum sentiment — both condensed rather than transcribed. Added `Communications Chair`/`Technology Chair` glossary entries and updated the `MailChimp`/`FSRC Community` entries to cross-link.
 - Published the Lewis Run 10 Miler (2026-01-10) sanitized report to `race-services/reports/`. 
 
