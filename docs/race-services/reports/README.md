@@ -1,6 +1,6 @@
 # Timing Summary
 
-One row per race analyzed, most recent first. "Chips Not Read at Finish" = zero-reads + missed-finish-only bibs (our own computed count). "% Missed" = share of all chip read opportunities (start + finish) that went unread. "Peak (60s)" matches the finish-line-timing field's standard runners-per-minute convention; "Peak (15s)" is a shorter burst window that catches short clusters a 60s window can smooth over -- more typical of FSRC's small-field races. Notes are kept short here (full detail is on the linked per-race report); a no-chip-assigned count only appears here when a race actually had one (rare process problem, not a permanent column). See the per-race sanitized report for the recovered-vs-unrecovered backup-timing breakdown.
+One row per race analyzed, most recent first. See the [column legend](SUMMARY-LEGEND.md) for what each column means.
 
 | Date | Distance | Participants | Zero Reads | Missed Start | Chips Not Read at Finish | % Missed | Peak (60s) | Peak (15s) | Notes |
 |---|---|---|---|---|---|---|---|---|---|
