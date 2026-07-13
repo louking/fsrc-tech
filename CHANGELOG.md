@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-07-13
+
+- Published the Lewis Run 10 Miler (2026-01-10) sanitized report to `race-services/reports/`. 
+
 ## 2026-07-11
 
 - Published the Wild Trail 5K & 10K (2026-04-04) sanitized report to `race-services/reports/`. First combined-distance race published here (5K and 10K run together off one shared start/timing setup, scored as two separate RDS events with different Gap Factors) — a clean result, 87 participants, only 1 missed start and 1 finish miss (recovered via backup timing). Updated `reports/README.md`'s running summary.
