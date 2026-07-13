@@ -1,6 +1,6 @@
 # FSRC Technology Wiki
 
-This wiki is a knowledge base about the technology that powers the Frederick Steeplechasers Running Club (FSRC) — built and maintained by Lou King and others, and licensed to the club for free use in perpetuity. It's organized by topic so both humans and LLMs can quickly find context on a given application, the shared framework it's built on, or how everything is hosted.
+This wiki is a knowledge base about the technology that powers the Frederick Steeplechasers Running Club (FSRC) — applications built and maintained by Lou King and others, and licensed to the club for free use in perpetuity, as well as other technical topics. It's organized by topic so both humans and LLMs can quickly find context on a given application, the shared framework it's built on, or how everything is hosted.
 
 ## Contents
 
