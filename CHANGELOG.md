@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-07-15
+
+- add Pie Run 2025 to `race-services/reports/`
+
 ## 2026-07-14
 
 - `applications/membertility.md`: the community module's calendar feed was refactored from per-series URLs (`/<interest>/calendars/<series>.ics`, one file per tag configured in `CALENDAR_TAG_GROUPS_<INTEREST>`) to a single `/<interest>/calendars/events.ics` endpoint taking a `tags=` query param (raw Discourse tag slugs, union match) plus `year=`/`from=`/`to=` date-window params, with `from=today` and an open-ended (all-future) default when `to` is omitted. Old URLs were retired outright, not redirected — a deliberate choice since no existing calendar subscriptions depended on them. That in turn made the disk-writing `filter-calendar` CLI command (and the `CALENDAR_TAG_GROUPS_<INTEREST>` config key / `get_tag_groups()` helper backing it) dead code — confirmed nothing else in the repo (cron, Nginx) referenced it — so it was deleted too, not just left in place. Pulled into `members`'s own `CLAUDE.md` first, then summarized here per this wiki's sync convention.
