@@ -2,6 +2,14 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-07-19
+
+- `applications/membertility.md`: updated the pending-review notifier's gotchas with two fixes from first live use — a `GET /review.json` pagination trap, and the PM now showing a readable title/submitter/local-time instead of a bare id and UTC timestamp. Pulled from `members`'s own `CLAUDE.md` per this wiki's sync convention.
+
+## 2026-07-18
+
+- `applications/membertility.md`: documented the community module's new pending-review notifier (`flask community notify-pending-reviews`), which PMs a category's moderator group(s) about stale Discourse review-queue items — a gap since Discourse's own moderation badge doesn't notify anyone. Pulled from `members`'s own `CLAUDE.md` per this wiki's sync convention.
+
 ## 2026-07-15
 
 - add Pie Run 2025 to `race-services/reports/`
