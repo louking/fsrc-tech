@@ -1,6 +1,10 @@
 # Changelog
 
 A running log of notable updates to this wiki. Newest entries at the top.
+## 2026-07-22
+
+- Added `/wiki-lint` (`.claude/skills/wiki-lint/`), the "Lint" operation from the wiki's guiding pattern (see `CLAUDE.md`'s new "Guiding pattern for wiki maintenance" section, referencing Karpathy's [LLM Wiki gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)): a quick mechanical pass (broken internal links, orphaned pages, unused glossary terms, CHANGELOG hygiene) plus an optional `deep` pass (source-repo drift, external anchor rot, Google Doc staleness, contradictions).
+- `infrastructure/hosting.md`: added a pointer to Lou's separately-maintained development-process doc set, [process.loutilities.com](https://process.loutilities.com/) (server/account setup, database migration, Python package release, Docker, HTTPS, virtual host setup), with a caution that parts predate the Docker/Rocky Linux migration and may be stale.
 
 ## 2026-07-19
 

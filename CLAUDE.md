@@ -19,6 +19,7 @@ The wiki content is built with [Zensical](https://zensical.org) (the Material fo
   - `docs/GLOSSARY.md` — FSRC/domain-specific jargon (Grand Prix, Equalizer, interest, RunSignup, etc.), kept sorted alphabetically. Add a term here when a page uses club- or domain-specific vocabulary an LLM wouldn't already know; don't duplicate generic software terms, which are linked inline instead.
 - `README.md` (repo root) — a short pointer for GitHub visitors to `docs/README.md`. It is **not** the wiki homepage; don't add real content here.
 - `local-notes/` — git-ignored (see `.gitignore`) scratch space for Lou's personal operational reference docs (e.g. a deploy-setup checklist) that don't belong in the published wiki content. Not indexed by any `README.md`.
+- `.claude/skills/` — Claude Code project skills for maintaining this wiki (currently just `wiki-lint`, the Lint operation — see "Guiding pattern for wiki maintenance" below). Not wiki content; not published.
 
 Keep new content organized by topic in these folders rather than as one flat pile of notes — that's the whole point of this repo.
 
@@ -27,6 +28,10 @@ Each topic folder under `docs/` has its own `README.md` acting as an index (link
 ## Changelog
 
 `CHANGELOG.md` tracks notable updates to this wiki (newest entries first). Add an entry there whenever you add or meaningfully change content.
+
+## Guiding pattern for wiki maintenance
+
+For future enhancements to this wiki, use Andrej Karpathy's ["LLM Wiki" gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) as a reference model: raw sources (repo `CLAUDE.md`s / source, Lou's operational Google Docs) stay immutable; this wiki is the compiled, cross-referenced knowledge base built from them; and this `CLAUDE.md` is the schema governing structure and conventions. The gist frames maintenance as three operations — **Ingest** (reading a source and updating the relevant *existing* pages, not just appending), **Query** (answering from the already-synthesized wiki), and **Lint** (a periodic pass for contradictions, stale claims, orphaned pages, missing cross-references). The "Deepening a..." sections below are this repo's existing Ingest workflow. Lint is `.claude/skills/wiki-lint/` (`/wiki-lint`, or `/wiki-lint deep` for the slower source/external-link staleness checks) — run it periodically rather than relying on ad hoc staleness-spotting.
 
 ## Deepening an app's (or framework's, or infrastructure component's) page
 
@@ -94,3 +99,5 @@ The actual application code lives in separate repos under https://github.com/lou
 The initial content was seeded from Lou's own overview doc, [FSRC Technology Software Overview](https://docs.google.com/document/d/1Gvoy-4-_305eKA3BszSJPyQpVuOmsV4hLmKKKOxmEUk/edit?usp=sharing), which he uses as the starting point when explaining the FSRC tech stack to someone new.
 
 `docs/race-services/` and `docs/org-tech/` are exceptions to the "code repos + one overview doc" pattern above: they document third-party tech FSRC configures but didn't build (race-day tech, and general club-operations tech respectively), seeded from separate operational Google Docs/Sheets/Slides Lou maintains (not code repos) — see the "Deepening a race-services or org-tech page" section above. This realizes the broader expansion agreed 2026-07-07 — covering other third-party tech FSRC depends on beyond Lou's own repos — which `docs/org-tech/` (added 2026-07-13) was the first concrete instance of; further third-party dependencies (e.g. more Google Workspace detail) should extend `docs/org-tech/` rather than reopen the folder-structure question.
+
+Lou also maintains a separate, older `loudevprocess` repo (cloned locally alongside the others, nested one level deeper: `...\projects\loudevprocess\loudevprocess`) — Sphinx/RST source for general development-process notes (Linux/server account setup, database migration handling, Python package release procedure, Docker, HTTPS, virtual host setup), published via readthedocs at [process.loutilities.com](https://process.loutilities.com/). Unlike the app repos above, this isn't deepened into its own wiki page — it's just linked from `docs/infrastructure/hosting.md`'s Development section, with a caution that parts predate the current Docker/Rocky Linux server setup and may be stale.
