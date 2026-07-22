@@ -1,10 +1,13 @@
 # Changelog
 
 A running log of notable updates to this wiki. Newest entries at the top.
+
 ## 2026-07-22
 
 - Added `/wiki-lint` (`.claude/skills/wiki-lint/`), the "Lint" operation from the wiki's guiding pattern (see `CLAUDE.md`'s new "Guiding pattern for wiki maintenance" section, referencing Karpathy's [LLM Wiki gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)): a quick mechanical pass (broken internal links, orphaned pages, unused glossary terms, CHANGELOG hygiene) plus an optional `deep` pass (source-repo drift, external anchor rot, Google Doc staleness, contradictions).
-- `infrastructure/hosting.md`: added a pointer to Lou's separately-maintained development-process doc set, [process.loutilities.com](https://process.loutilities.com/) (server/account setup, database migration, Python package release, Docker, HTTPS, virtual host setup), with a caution that parts predate the Docker/Rocky Linux migration and may be stale.
+- `infrastructure/hosting.md` and `framework/loutilities.md`: added cross-linked pointers to Lou's separately-maintained development-process doc set, [process.loutilities.com](https://process.loutilities.com/) — mostly server/account setup, database migration, Python package release, Docker, and HTTPS (hosting.md), but it also covers development-environment setup and `loutilities`-specific `tables.py`/Editor coding patterns (loutilities.md), so it's linked from both pages rather than just hosting. Caution: parts predate the Docker/Rocky Linux migration and may be stale.
+- `framework/loutilities.md`: added a `tables.py`/`tables-assets` gotcha — a button object overriding a standard Editor action (e.g. a conditionally-disabled `create` button) needs the shared Editor instance attached explicitly, since `get_button_options()` only does that automatically for the plain string form. Root-caused and fixed in `loutilities` from a live `members` crash (`Cannot read properties of null (reading 'i18n')` at table init). Pulled from `loutilities`'s own `CLAUDE.md` per this wiki's sync convention.
+- `framework/loutilities.md`: updated the above gotcha now that it's fixed upstream (loutilities [3.12.4](https://github.com/louking/loutilities/commit/d3e2355)) — `get_button_options()` now injects `editor:` on object-form standard-action overrides too, so the workaround is no longer needed.
 
 ## 2026-07-19
 

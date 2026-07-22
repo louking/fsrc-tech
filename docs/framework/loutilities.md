@@ -19,7 +19,7 @@ Key classes:
 - **`CrudFiles`** — CRUD endpoints for managing uploaded files attached to a record.
 - **`TablesCsv`** — lighter-weight base view for rendering a table from CSV-like data rather than a DB-backed model.
 
-Supporting static/template assets that consuming projects copy in: `tables-assets/`.
+Supporting static/template assets that consuming projects copy in: `tables-assets/`. `tables-assets/static/datatables.js`'s `get_button_options()` auto-attaches the shared Editor instance to a button configured as the literal string `'create'`/`'edit'`/etc., and (as of loutilities [3.12.4](https://github.com/louking/loutilities/commit/d3e2355)) also to an object-form override of one of those actions (e.g. `{'extend': 'create', 'enabled': False}` for a conditionally-disabled create button) — it now injects `editor:` there too unless the object already supplies its own. Before that fix, the object form skipped the annotation and left DataTables' built-in button text functions hitting a null editor reference at table-init time.
 
 ## user/ — accounts, roles, and multi-app SSO
 
@@ -31,6 +31,8 @@ Shared authentication/authorization layer built on Flask-Security-Too, used acro
 - **`tables.py`** (`loutilities/user/tables.py`, distinct from the top-level `tables.py` above) — `DbCrudApiInterestsRolePermissions` and friends: admin CRUD grids for managing users/roles/interests themselves, filtered by interest-based access.
 - **`views/userrole.py`** — the actual admin views for managing users, roles, interests, and applications; super-admins get full CRUD, ordinary admins see a restricted view limited to roles/interests they themselves are authorized to assign.
 - **`tablefiles.py`** — file upload handling (`FieldUpload`, `FilesCrud`, `FilesMixin`), storing uploads in directories grouped by interest/permission level.
+
+Lou also keeps a `patterns` page of `tables.py`/Editor code recipes (custom buttons, child rows, optimistic concurrency, reorderable rows, filters, etc.) in his development-process doc set at [process.loutilities.com](https://process.loutilities.com/) — see [hosting.md](../infrastructure/hosting.md#development) for the full doc set and its staleness caveat.
 
 ## Naming convention: "xtility"
 
