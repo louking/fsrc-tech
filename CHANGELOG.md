@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-08-01
+
+- `applications/membertility.md`: added a gotcha — `setuptools>=83` dropped `pkg_resources`, breaking `FormEncode==2.0.1`'s unconditional import of it; fixed by bumping to `FormEncode==2.1.1` upstream rather than pinning `setuptools` back down. Pulled from `members`'s own `CLAUDE.md` per this wiki's sync convention.
+
 ## 2026-07-31
 
 - `applications/contractility.md`: reworked the RunSignUp client gotcha now that `running`/`runtilities` published a `RunSignupBase` class (shared auth/session/`_rsuget`/`_rsugetcsv` plumbing) and split `RunSignupFluent` (needing `universalclient`/`rauth`) into its own module — the dependency-coupling objection from the 2026-07-30 entries no longer applies. `contracts.runsignup.RunSignUp` now subclasses `RunSignupBase` instead of vendoring the full client, keeping only its coupon-management/POST and participant-list methods. Also documented a transitive-dependency gotcha this surfaced: `running.runsignup` imports `loutilities.csvwt` at module level, which unconditionally needs `openpyxl` — contractility had to add it to `requirements.txt` purely to satisfy that import chain. Pulled from `contracts`'s own `CLAUDE.md` per this wiki's sync convention.
