@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-08-02
+
+- `applications/contractility.md`: trimmed the RunSignUp `RunSignupBase` gotcha bullet, which had ballooned into a 6-sentence paragraph duplicating method/config names and historical narrative already covered by `contracts`' own `CLAUDE.md` and this wiki's `CHANGELOG.md`. Kept only the subclassing fact, the `openpyxl` transitive-dependency trap, and the 2027-01-01 API token deadline.
+
 ## 2026-08-01
 
 - `applications/membertility.md`: added a gotcha — `setuptools>=83` dropped `pkg_resources`, breaking `FormEncode==2.0.1`'s unconditional import of it; fixed by bumping to `FormEncode==2.1.1` upstream rather than pinning `setuptools` back down. Pulled from `members`'s own `CLAUDE.md` per this wiki's sync convention.
