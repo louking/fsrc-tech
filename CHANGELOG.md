@@ -2,6 +2,16 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-07-31
+
+- `applications/contractility.md`: reworked the RunSignUp client gotcha now that `running`/`runtilities` published a `RunSignupBase` class (shared auth/session/`_rsuget`/`_rsugetcsv` plumbing) and split `RunSignupFluent` (needing `universalclient`/`rauth`) into its own module — the dependency-coupling objection from the 2026-07-30 entries no longer applies. `contracts.runsignup.RunSignUp` now subclasses `RunSignupBase` instead of vendoring the full client, keeping only its coupon-management/POST and participant-list methods. Also documented a transitive-dependency gotcha this surfaced: `running.runsignup` imports `loutilities.csvwt` at module level, which unconditionally needs `openpyxl` — contractility had to add it to `requirements.txt` purely to satisfy that import chain. Pulled from `contracts`'s own `CLAUDE.md` per this wiki's sync convention.
+
+## 2026-07-30
+
+- `applications/contractility.md`: added a gotcha explaining why `contracts`' `runsignup.py` is a standalone vendored fork rather than using the `running`/`runtilities` package — different RSU endpoints needed (coupons/participants vs. memberships/results), no POST support upstream. Also flagged known debt: still on legacy `runsignup.com` endpoints, hasn't adopted the `api.runsignup.com` migration or the 2027-01-01 API registration token requirement that `running`'s client already handles. Pulled from `contracts`'s own `CLAUDE.md` per this wiki's sync convention.
+- `applications/contractility.md`: updated the above gotcha — the legacy email/password Login API path in contractility's RunSignUp client is confirmed dead code (both call sites use `key=`/`secret=` only, no `RSU_EMAIL`/`RSU_PASSWORD` in config), and noted that centralizing auth via subclassing `running`'s client is a bad idea since it'd drag in `universalclient`/`rauth` as new dependencies — a shared `loutilities` module would be the right home instead. Pulled from `contracts`'s own `CLAUDE.md` per this wiki's sync convention.
+- `applications/contractility.md`: contracts' RunSignUp client was updated — dead legacy email/password Login API path removed, endpoints migrated to `api.runsignup.com`, `rsu_api_reg` token/secret support added for RunSignUp's 2027-01-01 API registration requirement, and client instantiation centralized into `helpers.make_runsignup_client()` (mirroring the pattern already used in `members`). Pulled from `contracts`'s own `CLAUDE.md` per this wiki's sync convention.
+
 ## 2026-07-22
 
 - Added `/wiki-lint` (`.claude/skills/wiki-lint/`), the "Lint" operation from the wiki's guiding pattern (see `CLAUDE.md`'s new "Guiding pattern for wiki maintenance" section, referencing Karpathy's [LLM Wiki gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)): a quick mechanical pass (broken internal links, orphaned pages, unused glossary terms, CHANGELOG hygiene) plus an optional `deep` pass (source-repo drift, external anchor rot, Google Doc staleness, contradictions).
