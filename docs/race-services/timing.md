@@ -19,7 +19,9 @@ The rest of this page marks configuration values as **(chip)** or **(scoring)** 
 
 Trident's UHF8 reader transmits tag ID reads roughly 100 times per second, but only forwards two per tag to scoring software: **Last Seen (LS)** and **Best Seen (BS)**. Per Trident's docs, the BS timestamp is always before or at the LS timestamp.
 
-RDS itself doesn't distinguish LS from BS — it takes the last read received (by timestamp) when processing start line reads, and the first read received (by timestamp) when processing finish line reads. Since UHF8 forwards only those two reads per tag, that means RDS ends up using LS from UHF8's perspective at the start, and BS from UHF8's perspective at the finish. Body position relative to the antenna mat means a runner's tag is read repeatedly as they cross — using the last read captures the true crossing moment at the start, while at the finish, using the first read relies on Trident's own Best Seen algorithm, which compensates for early reads and takes about half a second to settle, per Trident support.
+RDS itself doesn't distinguish LS from BS by name — it takes the last read received (by timestamp) when processing start line reads, and the first read received (by timestamp) when processing finish line reads. Since UHF8 forwards LS and BS in that order per tag (BS's timestamp is always at or before LS's), that resolves to LS at the start and BS at the finish. At the start, a runner's body blocks the antenna once they've crossed, so no extraneous reads arrive late — the last read is the true crossing moment. At the finish, reads can arrive early before the body fully commits, so RDS takes the first read (BS from Trident's perspective). 
+
+See Trident's [Tag Settings](https://www.manula.com/manuals/tridentrfid/timemachine/1/en/topic/tag-settings) docs for how LS/BS are determined.
 
 ### Start/finish determination
 

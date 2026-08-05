@@ -5,6 +5,7 @@ A running log of notable updates to this wiki. Newest entries at the top.
 ## 2026-08-05
 
 - `race-services/timing.md`: corrected the LS/BS explanation in "Last Seen, First Seen, and Best Seen" — RDS doesn't select LS vs. BS as separate feeds; it takes the last read received (by timestamp) at the start line and the first read received (by timestamp) at the finish, which happens to resolve to LS from UHF8's perspective at the start and BS at the finish. Previous wording implied RDS was BS-aware, which isn't accurate.
+- `race-services/timing.md`: corrected the Best Seen settling time twice — first from a fixed "about half a second" to "a configurable tag timeout, 5 seconds in FSRC's configuration," then further corrected per Trident's [Tag Settings](https://www.manula.com/manuals/tridentrfid/timemachine/1/en/topic/tag-settings) docs. Ultimately trimmed the Tag Timeout mechanics out of the paragraph entirely as too much detail for this page — the key point is what RDS does with the reads (last read at start, first read at finish), the order UHF8 forwards them (LS then BS), and why: the runner's body blocks further reads once they've crossed the start line, so no extraneous late reads arrive there, while at the finish reads can arrive early.
 
 ## 2026-08-02
 
