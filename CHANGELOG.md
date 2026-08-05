@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-08-05
+
+- `race-services/timing.md`: corrected the LS/BS explanation in "Last Seen, First Seen, and Best Seen" — RDS doesn't select LS vs. BS as separate feeds; it takes the last read received (by timestamp) at the start line and the first read received (by timestamp) at the finish, which happens to resolve to LS from UHF8's perspective at the start and BS at the finish. Previous wording implied RDS was BS-aware, which isn't accurate.
+
 ## 2026-08-02
 
 - `applications/contractility.md`: trimmed the RunSignUp `RunSignupBase` gotcha bullet, which had ballooned into a 6-sentence paragraph duplicating method/config names and historical narrative already covered by `contracts`' own `CLAUDE.md` and this wiki's `CHANGELOG.md`. Kept only the subclassing fact, the `openpyxl` transitive-dependency trap, and the 2027-01-01 API token deadline.

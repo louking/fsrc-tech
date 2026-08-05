@@ -19,7 +19,7 @@ The rest of this page marks configuration values as **(chip)** or **(scoring)** 
 
 Trident's UHF8 reader transmits tag ID reads roughly 100 times per second, but only forwards two per tag to scoring software: **Last Seen (LS)** and **Best Seen (BS)**. Per Trident's docs, the BS timestamp is always before or at the LS timestamp.
 
-RaceDay Scoring (RDS) uses LS at the start line and BS at the finish. Body position relative to the antenna mat means a runner's tag is read repeatedly as they cross — LS captures the true crossing moment at the start, while at the finish, Trident's own algorithm (Best Seen) compensates for early reads and takes about half a second to settle, per Trident support.
+RDS itself doesn't distinguish LS from BS — it takes the last read received (by timestamp) when processing start line reads, and the first read received (by timestamp) when processing finish line reads. Since UHF8 forwards only those two reads per tag, that means RDS ends up using LS from UHF8's perspective at the start, and BS from UHF8's perspective at the finish. Body position relative to the antenna mat means a runner's tag is read repeatedly as they cross — using the last read captures the true crossing moment at the start, while at the finish, using the first read relies on Trident's own Best Seen algorithm, which compensates for early reads and takes about half a second to settle, per Trident support.
 
 ### Start/finish determination
 
