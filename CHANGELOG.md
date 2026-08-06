@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-08-06
+
+- `applications/contractility.md`: added pytest coverage for the RunSignUp refactor (`test/test_runsignup.py`, `test/test_helpers.py`) and fixed what turned out to be a fully broken `test/` suite — `conftest.py` imported from the app's pre-rename package name (`racesupportcontracts` instead of `contracts`) at module level, which failed at conftest collection time and silently broke every test in the directory, not just the ones using the `app`/`dbapp` fixtures. Added `pytest.ini` (`app/src` on `sys.path`) and an `APP_NAME` env default in conftest, since `contracts/__init__.py` reads it at import time and it's normally only supplied by Docker Compose's `.env`. Also documented a nasty local-venv trap hit along the way: installing real `passlib` on top of `libpass` (an actively-maintained fork Flask-Security-Too here actually depends on, which installs its files into the `passlib/` import path) silently overwrites it and reintroduces passlib's `pkg_resources` transitive-import break — the fix is reinstalling `libpass`, not adding `passlib`. One pre-existing test (`test_basic.py::test_login`) still errors for an unrelated reason (`Testing.EXCEPTION_EMAIL` missing from `settings.py`) — flagged but not fixed, out of scope for this pass. Pulled from `contracts`'s own `CLAUDE.md` per this wiki's sync convention.
+
 ## 2026-08-05
 
 - `race-services/timing.md`: corrected the LS/BS explanation in "Last Seen, First Seen, and Best Seen" — RDS doesn't select LS vs. BS as separate feeds; it takes the last read received (by timestamp) at the start line and the first read received (by timestamp) at the finish, which happens to resolve to LS from UHF8's perspective at the start and BS at the finish. Previous wording implied RDS was BS-aware, which isn't accurate.
