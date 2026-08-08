@@ -12,7 +12,7 @@
 
 ## Configuration
 
-- `config/Caddyfile` — active config, used for **development**: proxies `*.localhost` domains (e.g. `members.localhost`, `routes.localhost`, `scores.localhost`, `contracts.localhost`, `tmsim.localhost`, `logmon.localhost`) to the corresponding app's port on `host.docker.internal`.
+- `config/Caddyfile` — active config, used for **development**: proxies `*.localhost` domains (e.g. `members.localhost`, `routes.localhost`, `scores.localhost`, `contracts.localhost`, `tmsim.localhost`, `logmon.localhost`) to the corresponding app's port on `host.docker.internal`. One domain is different: `fsrc-tech.localhost` serves this wiki itself as static files (`file_server`, no proxy) — the sibling `fsrc-tech` repo's working directory is bind-mounted straight into the container via `FSRC_TECH_WWW_HOST` in `.env`.
 - `config/Caddyfile.example` — production template with anonymized domains and Cloudflare TLS.
 - The actual **production** Caddyfile lives directly on the server (`~/caddy-prod/config/Caddyfile`) and is managed there, not deployed from the repo — it's diverged significantly from the example and hosts all the real domains (loutilities.com, steeplechasers.org, scoretility.com, etc.).
 
