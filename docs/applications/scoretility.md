@@ -14,7 +14,7 @@ scoretility is multi-club enabled — it supports separate membership, races, di
 ## Tech stack
 
 - Backend: Python 3.12, Flask 3.0.3, SQLAlchemy 2.x
-- Database: MySQL 8.0.40 (SQLite in-memory for testing)
+- Database: MySQL 8.0.40 via PyMySQL driver (SQLite in-memory for testing) — see gotcha below
 - Task queue: Celery 5.4 with RabbitMQ, for async results processing
 - Frontend: server-rendered Jinja2 with DataTables, Flask-Assets for JS/CSS bundling
 - Auth: Flask-Security-Too with Flask-Principal for role-based access control
@@ -33,9 +33,11 @@ scoretility is multi-club enabled — it supports separate membership, races, di
 ## Gotchas worth knowing
 
 - **JS assets are shadowed by a Docker volume mount** to an external `js-common` directory (shared across apps, same pattern as membertility) — editing `app/src/rrwebapp/static/js/` in the repo directly has no effect on the running container.
-- **Config** is read from `/config/rrwebapp.cfg`, with secrets (DB password, RabbitMQ password) mounted as Docker secrets.
+- **Config** is read from `/config/rrwebapp.cfg`, with secrets (DB password, RabbitMQ password) mounted as Docker secrets. The `app` container's crontab is mounted the same way now, from `./config/cronjobs` — a runtime bind mount rather than baked into the image at build time, so the cron schedule can change without a rebuild.
 - **Custom DataTables buttons** follow a two-file JS pattern: `beforedatatables.js` defines button handler functions that must exist before DataTables initializes (a button's Python `action` key is a string `eval()`'d client-side), and `afterdatatables.js` holds per-path post-init hooks.
 - **`RaceResult`'s unique constraint doesn't actually prevent duplicates**: it includes `runnername`, which the tabulate flow never sets (always `NULL`), and SQL unique constraints treat `NULL` as distinct from `NULL`. A fast double-click on a button using the shared `ajax_update_db_noform()` JS helper (which doesn't disable itself) can fire two overlapping tabulate requests that both pass the "results already exist" check before either commits, doubling every result. Mitigated client-side for the Tabulate button by disabling on click and re-enabling via a document-level `ajaxComplete` listener; other buttons using that helper remain exposed.
+- **Don't `pip install passlib` directly** — same gotcha as contractility: Flask-Security-Too's declared dependency is `passlib`, but real (unmaintained) `passlib` breaks under `setuptools>=83` (dropped `pkg_resources`; `passlib/pwd.py` does an unconditional `import pkg_resources`). Fix is `libpass`, an actively-maintained fork that installs into the same `passlib/` import path — `requirements.txt` has `libpass==1.9.3`, no separate `passlib` entry. Installing real `passlib` on top silently overwrites `libpass`'s files and reintroduces the break.
+- **MySQL 8 + Alpine containers**: `mysqlclient` triggers a TLS/SSL certificate verification failure (Alpine's MariaDB Connector/C defaults to SSL). Fix is to switch to the pure-Python **PyMySQL** driver (`mysql+pymysql://` URI scheme) instead of patching SSL settings — same fix and same gotcha as membertility. `apk add mysql-client` (the CLI, for `mariadb`/`mariadb-dump` cron backups) is unrelated and stays either way.
 - **`runtilities` needs `>=3.0.1`, not just `>=3.0.0`**: `runtilities==3.0.0`'s `running.runningahead` module had a module-level `import version` with no top-level `version` package to resolve it — always fails. Harmless for contractility/membertility (they never import `running.runningahead`, only `running.runsignup`), but fatal for scoretility, which imports it for its RunningAHEAD results-analysis integration and hit it on every app startup. Fixed upstream in the `running` repo (the dead code was leftover from a non-functional `main()` CLI stub — `argparse`'s `version=` kwarg was removed from Python 3 years ago, so that function had never actually run).
 
 For full detail on any of the above (directory layout, all CLI/deployment commands via Fabric, results-analysis debug flags), see the repo's own `CLAUDE.md` linked above — treat it as the authoritative, actively-maintained source rather than duplicating it here.
