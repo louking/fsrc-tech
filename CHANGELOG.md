@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-08-09
+
+- `applications/scoretility.md`: extended the MySQL 8 + Alpine PyMySQL gotcha — the `mysql+pymysql://` scheme has to be set on two separate connection strings, not one. The main app DB URI (`settings.py`) was fixed already, but Celery's result-backend URI (`celery.py`) was still plain `db+mysql://`. Initially thought this only broke the status-polling view (`ModuleNotFoundError: No module named 'MySQLdb'` on `/admin/importresultsstatus/<task_id>`), but a second traceback from the same incident showed it's worse: the results-import task itself calls `self.update_state(...)` inside its own outer `try/except`, so the same error gets caught there and triggers `db.session.rollback()` — silently discarding an entire in-progress import and reporting fake "success". Filed as [rrwebapp#685](https://github.com/louking/rrwebapp/issues/685) and fixed. Pulled from `rrwebapp`'s own `CLAUDE.md` per this wiki's sync convention.
+
 ## 2026-08-08
 
 - `infrastructure/caddy.md`: noted that `fsrc-tech.localhost` in the dev Caddyfile is different from the other local `*.localhost` domains — it's served as static files directly (`file_server`, no proxy), with this wiki's own working directory bind-mounted into the caddy container via `FSRC_TECH_WWW_HOST`. Pulled from `caddy-docker`'s own `CLAUDE.md` per this wiki's sync convention.
