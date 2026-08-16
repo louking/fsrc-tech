@@ -19,7 +19,7 @@ Key classes:
 - **`CrudFiles`** — CRUD endpoints for managing uploaded files attached to a record.
 - **`TablesCsv`** — lighter-weight base view for rendering a table from CSV-like data rather than a DB-backed model.
 
-Supporting static/template assets that consuming projects copy in: `tables-assets/`. `tables-assets/static/datatables.js`'s `get_button_options()` auto-attaches the shared Editor instance to a button configured as the literal string `'create'`/`'edit'`/etc., and (as of loutilities [3.12.4](https://github.com/louking/loutilities/commit/d3e2355)) also to an object-form override of one of those actions (e.g. `{'extend': 'create', 'enabled': False}` for a conditionally-disabled create button) — it now injects `editor:` there too unless the object already supplies its own. Before that fix, the object form skipped the annotation and left DataTables' built-in button text functions hitting a null editor reference at table-init time.
+Supporting static/template assets that consuming projects copy in: `tables-assets/`. `tables-assets/static/datatables.js`'s `get_button_options()` auto-attaches the shared Editor instance to a button configured as the literal string `'create'`/`'edit'`/etc., and — from loutilities 3.12.4 onward — also to an object-form override of one of those actions (e.g. `{'extend': 'create', 'enabled': False}` for a conditionally-disabled create button), injecting `editor:` there too unless the object already supplies its own. On earlier versions, the object form skips the annotation, leaving DataTables' built-in button text functions hitting a null editor reference at table-init time.
 
 ## user/ — accounts, roles, and multi-app SSO
 
