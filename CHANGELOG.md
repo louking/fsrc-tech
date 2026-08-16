@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-08-14
+
+- `applications/logmon.md`: added logmon's first-ever `pytest` suite (146 tests), following the same bare-Flask-app pattern used for scoretility/contractility/membertility (`create_app()` has the same `g.loutility`-before-`db.create_all()` ordering issue documented for those repos). Two new patterns not seen in the other repos' suites: `alerter.py`'s senders and `access_analysis.get_cpu_metrics` import their collaborator inside the function body rather than at module scope, so tests patch the collaborator's own module rather than the calling module; and a single `follower._get_redis()`, also imported fresh per call by `diskmon.py`/`memmon.py`, is covered for all three by patching it once with a small in-repo `FakeRedis`. Pulled from `logmon`'s own `CLAUDE.md` per this wiki's sync convention.
+
 ## 2026-08-13
 
 - `applications/routetility.md`: added a follow-on gotcha to the Google Maps async-loading entry below — switching to async loading exposed a second, independent race on the route detail page between Maps' `onAdd()` callback and the route-data AJAX response, which used to leave the elevation chart's distance array uncomputed (and the chart broken with a `TypeError`) whenever the AJAX response won that race. Fixed by computing the distance array unconditionally as soon as route data arrives rather than as a side effect of `onAdd()` having already fired. Also corrected an earlier note in the repo's own `CLAUDE.md` (and pulled the correction here) that had claimed bundle URLs have no cache-busting — the installed `webassets` version's own defaults (hash-based `versions`, `url_expire` left unset) already append a `?<hash>` query string to every bundle URL, confirmed live by rebuilding a bundle and observing its URL hash change with no `Environment` config change. Pulled from `runningroutes`'s own `CLAUDE.md` per this wiki's sync convention.
