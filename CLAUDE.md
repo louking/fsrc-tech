@@ -90,6 +90,12 @@ change.
 
 Once a `.venv/` (e.g. for Zensical, see below) exists in this repo, plain `git status`/`git mv` calls have taken several minutes instead of being near-instant — observed repeatedly in this environment, cause unconfirmed (not OneDrive — this path isn't under OneDrive, and `Documents` isn't redirected there — so likely antivirus/Defender or some other real-time scanner reacting to the venv's thousands of small files, even though `.venv/` is gitignored). Don't assume a hung git command is broken or retry it; run it with `run_in_background` and wait rather than killing/repeating it.
 
+## Splitting a combined diff into multiple commits
+
+Because `git add`/`git commit` are run with `run_in_background` here (see above), staging one topic's files while editing another file in the working tree to prep the *next* commit is a race: if the edit lands on disk before the backgrounded `git add` actually reads the file, that edit's content gets silently swept into the earlier commit instead of the later one it was meant for. Seen concretely splitting a five-file wiki-sync diff into four topic commits (`.gitignore`, membertility, routetility, logmon) on 2026-08-16: `CHANGELOG.md` sections meant for the routetility/logmon commits ended up bundled into the membertility commit instead, because the next section was written back into `CHANGELOG.md` while the prior commit was still running in the background.
+
+The fix isn't to avoid the pattern — it's to verify after the fact rather than trust the intended split: wait for each background commit to actually finish (confirmed by its task notification, not just launching the next step) before editing the same file again, and once all commits are made, diff the pre-split state against `HEAD` for the full set of touched files (`git diff <original-commit> HEAD -- <files>`) to confirm the cumulative result matches the original combined diff exactly — no lines lost or duplicated — even if the per-commit boundaries don't perfectly match the original plan. A mismatched boundary (a CHANGELOG section landing one commit early) is cosmetic; lost or duplicated content is not, so the verification step is the part that actually matters.
+
 ## Markdown checklists
 
 Use unordered list markers for task-list checkboxes — `- [ ]` / `* [ ]`, not ordered markers (`1. [ ]`). This is the portable GFM/CommonMark form and is confirmed to render correctly in Obsidian; rely on list order rather than manually-numbered titles if sequence matters.
