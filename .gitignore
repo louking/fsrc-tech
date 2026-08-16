@@ -2,3 +2,6 @@
 .venv/
 site/
 .obsidian/
+.stfolder/
+.stignore
+.stversions/
