@@ -34,6 +34,7 @@ Monitors application logs and server utilization.
 
 ## Gotchas worth knowing
 
-- Several config files are gitignored and must be copied from `.example` versions on a fresh checkout: `docker-compose.override.yml`, `config/logapps.yml`, `config/*.txt` (Docker secrets for Flask secret key, DB passwords, SMTP password, SNS webhook key).
+- Several config files are gitignored and must be copied from `.example` versions on a fresh checkout: `docker-compose.override.yml`, `config/logapps.yml`, `config/*.txt` (Docker secrets for Flask secret key, DB passwords, SMTP password, SNS webhook key). `config/cronjobs` is a special case: it has no `.example` template at all, and Docker Compose silently auto-creates a missing bind-mount source as an *empty directory* rather than erroring — so a missing `cronjobs` file breaks `crond`'s maintenance jobs with no visible failure.
+- **`logmon.log` can end up owned `root:root`** while `appuser` owns its directory, silently breaking every request's file-logging (`PermissionError`, swallowed and only visible as repeated `--- Logging error ---` blocks) — survives container restarts once it happens. Fix: `docker compose exec app rm /var/log/logmon/logmon.log` (the 0777 log directory lets `appuser` unlink the file it doesn't own; the app recreates it correctly on next write).
 
 For full detail (all CLI commands, service table, configuration loading), see the repo's own `CLAUDE.md` linked above.

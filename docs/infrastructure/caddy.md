@@ -24,5 +24,6 @@ Deployed with [Fabric](https://www.fabfile.org/): `fab -H <server-hostname> depl
 
 - HTTP/3 (QUIC) is explicitly disabled (`protocols h1 h2`) — Caddy advertises it by default via `Alt-Svc`, which breaks clients whose UDP/443 is blocked (`ERR_QUIC_PROTOCOL_ERROR`). Cloudflare already terminates HTTP/3 at its edge, so Caddy doesn't need to.
 - `CF_API_TOKEN` is shared between the caddy service (DNS-based TLS) and the certbot service (CDN cert DNS challenge) — no separate token needed.
+- `entrypoint.sh` needs its executable bit set in git (`100755`), not just `RUN chmod +x` in the Dockerfile — a script committed as `100644` (common when committed from a Windows checkout, where `core.filemode` defaults off) still builds fine on Windows-based Docker, but fails at container start (`permission denied`) once built on a Linux host, including local WSL dev (see [hosting.md](hosting.md#development)).
 
 For full detail (all env vars, first-time CDN cert setup, debug mode), see the repo's own `CLAUDE.md` linked above.
