@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-08-17
+
+- `race-services/reports/`: republished three race reports (`2026-04-04.md` Wild Trail 5K & 10K, `2026-05-25.md` Panda 5K, `2026-07-04.md` Indy 5000) plus `README.md`/`SUMMARY-LEGEND.md`, picking up chip-timing-analysis fixes made since the original 2026-07-10 through 2026-07-15 publish that had never actually landed here despite an attempted republish: the auto-derived "Registered" count (added to chip-timing-analysis 2026-07-13) and a correction to Indy 5000's finish-line density numbers (peak 60s window 9→11, peak 15s burst 5→7) — its real source directory carries RDS's own zip export, which chip-timing-analysis's local CSV-only copy didn't reflect for that one metric even though every other number between the two matched exactly. `2025-07-19.md`/`2026-01-10.md` were already current and untouched.
+
 ## 2026-08-16
 
 - `infrastructure/hosting.md`: noted local dev's move from Windows-native to a WSL2 (Ubuntu) environment (migrated repo-by-repo through 2026-08, one repo per session, tracked in this repo's own git-ignored `local-notes/wsl-migration-checklist.md`), with two deliberate holdouts — tmtility's Windows-only hardware-reader clients and this wiki's own repo. `infrastructure/caddy.md`: added a gotcha on `entrypoint.sh`'s git executable bit, found during the migration — a script committed non-executable from a Windows checkout only fails at container start once built on a Linux host (production, or local WSL dev now). This repo's own `CLAUDE.md` (`## Deepening an app's page`) was also updated to point future sessions at the WSL paths for migrated repos — the Windows-side checkouts of `loutilities`/`caddy-docker`/`rrwebapp`/`contracts`/`members`/`runningroutes` are now frozen and renamed `-obsolete`.
