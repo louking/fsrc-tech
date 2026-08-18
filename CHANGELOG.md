@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-08-18
+
+- `framework/loutilities.md`: added a gotcha on `ManageLocalTables.update()`'s duplicate-`LocalUser`-row history, fixed via [loutilities#103](https://github.com/louking/loutilities/issues/103) (a lookup that lost track of rows once they went inactive) and [loutilities#104](https://github.com/louking/loutilities/issues/104) (no locking against concurrent callers, e.g. multiple gunicorn workers syncing at boot). Not documented in loutilities' own `CLAUDE.md`; found by checking contracts/members/runningroutes directly (all on `loutilities==3.13.1`, all wiring a `lockfile=`, all carrying a dedup migration) after a prompt to double-check whether this wiki had picked up the change.
+
 ## 2026-08-17
 
 - `race-services/reports/`: republished three race reports (`2026-04-04.md` Wild Trail 5K & 10K, `2026-05-25.md` Panda 5K, `2026-07-04.md` Indy 5000) plus `README.md`/`SUMMARY-LEGEND.md`, picking up chip-timing-analysis fixes made since the original 2026-07-10 through 2026-07-15 publish that had never actually landed here despite an attempted republish: the auto-derived "Registered" count (added to chip-timing-analysis 2026-07-13) and a correction to Indy 5000's finish-line density numbers (peak 60s window 9→11, peak 15s burst 5→7) — its real source directory carries RDS's own zip export, which chip-timing-analysis's local CSV-only copy didn't reflect for that one metric even though every other number between the two matched exactly. `2025-07-19.md`/`2026-01-10.md` were already current and untouched.
