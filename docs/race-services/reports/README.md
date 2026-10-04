@@ -2,7 +2,7 @@
 
 ## Overall (all races to date)
 
-Cumulative across the races below, since 2025-07-19:
+Cumulative across the chip-timed races below, since 2025-07-19. Races timed by Time Machine only (no chips) are left out of these totals.
 
 <!-- chip-timing-analysis:overall:start -->
 
@@ -25,6 +25,7 @@ One row per race analyzed, most recent first. See the [column legend](SUMMARY-LE
 <!-- chip-timing-analysis:summary-table -->
 | Date | Distance | Participants | Zero Reads | Missed Start | Missed Finish | % Missed | Peak (60s) | Peak (15s) | Notes |
 |---|---|---|---|---|---|---|---|---|---|
+| [2026-10-03](2026-10-03.md) | 5K | 77 | n/a | n/a | n/a | n/a | 8 | 4 | Not chip timed |
 | [2026-09-05](2026-09-05.md) | 5 Miles | 23 | 0 | 0 | 0 | 0.0% | 4 | 2 | FSRC practice race; RaceDay Mobile photo backup trialed |
 | [2026-07-04](2026-07-04.md) | 5K | 111 | 0 | 1 | 3 | 1.8% | 11 | 7 | Brief live-network interruption ~09:05:51-09:06:52 (~1 min);… |
 | [2026-05-25](2026-05-25.md) | 5K | 261 | 0 | 5 | 3 | 1.5% | 27 | 11 | 12 no chip assigned; 12 participants were not assigned a chi… |
