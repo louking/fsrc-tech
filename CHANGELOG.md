@@ -6,6 +6,7 @@ A running log of notable updates to this wiki. Newest entries at the top.
 
 - `applications/tmtility.md`: added a gotcha about silent Bluetooth barcode scanner dropouts ([tm-csv-connector#146](https://github.com/louking/tm-csv-connector/issues/146)). When a scanner powers off, its virtual COM port stays open with no error, and the scanner doesn't reconnect until the port is reopened. `barcode-scanner-client` now polls the Windows Bluetooth link state and reopens the port automatically. Bench-tested 2026-10-05 in a user session; not yet tested under the NSSM service account.
 - `applications/tmtility.md`: added a gotcha about restarted clients losing the current race ([tm-csv-connector#147](https://github.com/louking/tm-csv-connector/issues/147)). A client that restarted kept its race at 0, so the database rejected everything it posted. Found during the same bench test.
+- `applications/tmtility.md`: rewrote today's gotchas to describe current behavior rather than the bugs behind them. The scanner-dropout bullet no longer narrates the incident ([tm-csv-connector#146](https://github.com/louking/tm-csv-connector/issues/146)). The two race-propagation bullets ([#147](https://github.com/louking/tm-csv-connector/issues/147), [#148](https://github.com/louking/tm-csv-connector/issues/148)) are merged into one on how clients learn the current race. Added a bullet on recovering cleared results from the per-race Clear All snapshot.
 
 ## 2026-10-04
 
