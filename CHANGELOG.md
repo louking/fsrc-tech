@@ -2,6 +2,13 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-10-07
+
+- `applications/tmtility.md`: the scanner-dropout gotcha now notes the results page's *reconnecting* state ([tm-csv-connector#151](https://github.com/louking/tm-csv-connector/issues/151)). The scanner and chip reader clients report whether they're connected, connecting, auto-retrying, or stopped. While retrying, the page shows an orange button and banner and beeps, and the button stops the retries. Previously a retrying client looked the same as one the operator had disconnected.
+- `applications/tmtility.md`: added a gotcha: filtering on a missing race matches every simulation-run row. Found 2026-10-07 in a results page left open across a dev-stack restart; what triggered it there is unknown. A private window then showed the general case: on a first visit the table briefly lists simulation results before the page sends its race. The page listed all simulation results, and a scanned-bib Del on one of them was blocked by a foreign-key error and rolled back, with no data changed.
+- `applications/tmtility.md`: added an operational note from [tm-csv-connector#151](https://github.com/louking/tm-csv-connector/issues/151) bench testing. After a multi-minute network outage, the Trident reader refused reconnects (each accepted and then closed at once) for 6+ minutes, until a power-cycle. The likely cause is the reader holding a stale single TCP session; this isn't confirmed.
+- `applications/tmtility.md`: added the NSSM restart gotcha found in #151 testing. Restarting a client service while its non-daemon reader thread is blocked in a connect attempt leaves the service stopped ([tm-csv-connector#153](https://github.com/louking/tm-csv-connector/issues/153)); the workaround is `nssm start`.
+
 ## 2026-10-05
 
 - `applications/tmtility.md`: added a gotcha about silent Bluetooth barcode scanner dropouts ([tm-csv-connector#146](https://github.com/louking/tm-csv-connector/issues/146)). When a scanner powers off, its virtual COM port stays open with no error, and the scanner doesn't reconnect until the port is reopened. `barcode-scanner-client` now polls the Windows Bluetooth link state and reopens the port automatically. Bench-tested 2026-10-05 in a user session; not yet tested under the NSSM service account.
