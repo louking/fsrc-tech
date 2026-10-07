@@ -77,6 +77,8 @@ Written content here is under `LICENSE` (CC BY-SA 4.0) — a documentation licen
 
 In this environment, `git commit -m "$(cat <<'EOF' ... EOF)"` (heredoc-in-command-substitution) has hung indefinitely rather than completing. Write the message to a temp file and use `git commit -F <file>` instead — reliable, and sidesteps quoting/heredoc issues entirely.
 
+When a commit's issue annotation refers to an issue in a source repo, write it fully qualified, e.g. `(louking/tm-csv-connector#151)`. Most commits here are wiki syncs of other repos' issues, and GitHub resolves a bare `#151` against fsrc-tech itself, so the link goes to the wrong place. Use a bare `#N` only for real fsrc-tech issues.
+
 ## Pushing changes to `.github/workflows/`
 
 GitHub rejects a push that creates or updates any file under `.github/workflows/` (e.g.
