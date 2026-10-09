@@ -2,6 +2,12 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-10-09
+
+- `applications/tmtility.md`: replaced the NSSM restart note in the Trident bullet with its own gotcha ([tm-csv-connector#153](https://github.com/louking/tm-csv-connector/issues/153)). It says to restart a client service with `Restart-Service`, not `nssm restart`, and describes how a client crash is handled: NSSM restarts the client, and the results page shows "client is not running" and then a "client restarted -- click Connect" banner.
+- `applications/tmtility.md`: reworded the Trident connectivity gotcha to describe current behavior, and to say what to do when the reader refuses reconnects (power-cycle it) instead of describing the bench observation.
+- `applications/tmtility.md`: added a gotcha that `tm-reader-client` lacks the hardening the scanner and chip reader clients have, so an unresponsive Time Machine makes **Connect** hang silently ([tm-csv-connector#154](https://github.com/louking/tm-csv-connector/issues/154)).
+
 ## 2026-10-07
 
 - `applications/tmtility.md`: the scanner-dropout gotcha now notes the results page's *reconnecting* state ([tm-csv-connector#151](https://github.com/louking/tm-csv-connector/issues/151)). The scanner and chip reader clients report whether they're connected, connecting, auto-retrying, or stopped. While retrying, the page shows an orange button and banner and beeps, and the button stops the retries. Previously a retrying client looked the same as one the operator had disconnected.
