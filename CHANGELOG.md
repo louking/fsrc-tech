@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-10-10
+
+- `applications/tmtility.md`: the cleared-results gotcha now covers duplicate bib-scan debounce ([tm-csv-connector#131](https://github.com/louking/tm-csv-connector/issues/131), [tm-csv-connector#155](https://github.com/louking/tm-csv-connector/issues/155)). Debounce is a per-race **Ignore repeat scans** checkbox on the results view, and Clear All turns it on. In tm-csv-connector it used to be on whenever the race had a Clear All snapshot. A bench-test clear then left it on into race day, with no way to turn it off except deleting the snapshot.
+
 ## 2026-10-09
 
 - `applications/tmtility.md`: replaced the NSSM restart note in the Trident bullet with its own gotcha ([tm-csv-connector#153](https://github.com/louking/tm-csv-connector/issues/153)). It says to restart a client service with `Restart-Service`, not `nssm restart`, and describes how a client crash is handled: NSSM restarts the client, and the results page shows "client is not running" and then a "client restarted -- click Connect" banner.
