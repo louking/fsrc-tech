@@ -6,11 +6,11 @@ Cumulative across the chip-timed races below, since 2025-07-19. Races timed by T
 
 <!-- chip-timing-analysis:overall:start -->
 
-- **590 timed participants** over 6 races.
+- **717 timed participants** over 7 races.
 - **0 non-functioning chips** (chip assigned but not read at start or finish).
-- **10 finish-line read misses** (1.7% of participants).
-- **7 start-line read misses** (1.2% of participants).
-- **~1.4%** of all chip read opportunities (start + finish) missed, pooled across races.
+- **10 finish-line read misses** (1.4% of participants).
+- **9 start-line read misses** (1.3% of participants).
+- **~1.3%** of all chip read opportunities (start + finish) missed, pooled across races.
 
 <!-- chip-timing-analysis:overall:end -->
 
@@ -25,6 +25,7 @@ One row per race analyzed, most recent first. See the [column legend](SUMMARY-LE
 <!-- chip-timing-analysis:summary-table -->
 | Date | Distance | Participants | Zero Reads | Missed Start | Missed Finish | % Missed | Peak (60s) | Peak (15s) | Notes |
 |---|---|---|---|---|---|---|---|---|---|
+| [2026-10-24](2026-10-24.md) | 5K | 127 | 0 | 2 | 0 | 0.8% | 11 | 7 | — |
 | [2026-10-03](2026-10-03.md) | 5K | 77 | n/a | n/a | n/a | n/a | 8 | 4 | Not chip timed |
 | [2026-09-05](2026-09-05.md) | 5 Miles | 23 | 0 | 0 | 0 | 0.0% | 4 | 2 | FSRC practice race; RaceDay Mobile photo backup trialed |
 | [2026-07-04](2026-07-04.md) | 5K | 111 | 0 | 1 | 3 | 1.8% | 11 | 7 | Brief live-network interruption ~09:05:51-09:06:52 (~1 min);… |
