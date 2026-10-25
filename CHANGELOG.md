@@ -2,6 +2,10 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-10-25
+
+- `race-services/reports/2026-10-25.md`: new sanitized per-race report for a 2026-10-25 5K (247 participants, 292 registered). Every finisher was chip-read at the finish, so no backup time was used. The backup stream had problems that didn't affect results: bar codes on one block of bibs didn't match the printed number, some finishers removed the bar code tag, and Time Machine bib entry couldn't keep up at peak density (20 finishers in 60s). `README.md` and `SUMMARY-LEGEND.md` updated. Missed Start no longer counts late starts (a chip read crossing the start after the start window closed); this race had three, and no earlier race had any.
+
 ## 2026-10-10
 
 - `applications/tmtility.md`: the cleared-results gotcha now covers duplicate bib-scan debounce ([tm-csv-connector#131](https://github.com/louking/tm-csv-connector/issues/131), [tm-csv-connector#155](https://github.com/louking/tm-csv-connector/issues/155)). Debounce is a per-race **Ignore repeat scans** checkbox on the results view, and Clear All turns it on. In tm-csv-connector it used to be on whenever the race had a Clear All snapshot. A bench-test clear then left it on into race day, with no way to turn it off except deleting the snapshot.
