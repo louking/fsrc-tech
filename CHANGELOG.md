@@ -4,7 +4,7 @@ A running log of notable updates to this wiki. Newest entries at the top.
 
 ## 2026-10-26
 
-- `race-services/reports/`: per-race reports for chip-timed races now include start-line density (most start crossings in one second, and how long after the gun 90% of the field had crossed). Finish density adds a 5s window for groups finishing together. `README.md` gains Start Peak (1s) and Peak (5s) columns, and `SUMMARY-LEGEND.md` describes them.
+- `race-services/reports/`: per-race reports for chip-timed races now include start-line density (most start crossings in one second, and how long after the gun 90% of the field had crossed). Finish density adds a 5s window for groups finishing together. `README.md` gains Start Peak (1s) and Finish Peak (5s) columns, the existing Peak (60s) and Peak (15s) columns are renamed Finish Peak (60s) and Finish Peak (15s), and `SUMMARY-LEGEND.md` describes them.
 
 ## 2026-10-25
 
