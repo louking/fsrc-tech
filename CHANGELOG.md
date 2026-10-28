@@ -2,6 +2,12 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-10-28
+
+- `applications/tmtility.md`: the full-dataset poll gotcha now covers the Use/Ins/Del scan-action buttons as fixed in tm-csv-connector 1.8.3 ([tm-csv-connector#156](https://github.com/louking/tm-csv-connector/issues/156)): polls don't pile up, the buttons act once on press and ignore a press on a changed row, and selecting a row holds the table. Prompted by operator reports at a 2026-10-25 race that the buttons lagged and sometimes needed several presses. A new gotcha says that checks under `filelock` must use locking reads; two failures in bench testing came from plain reads seeing a snapshot taken before the request waited for the lock.
+- `applications/tmtility.md`: the `None` race filter gotcha now describes the fix in 1.8.3 ([tm-csv-connector#152](https://github.com/louking/tm-csv-connector/issues/152)): with no race or simulation run in the session, the results views show no rows, and scan actions refuse rows with neither. Before it, a first visit briefly listed every simulation result, and a scan action on one of those rows could change simulation data.
+- `applications/tmtility.md`: the intro now says that tmtility's main purpose is to be the backup when chip reads are missed, so operator aids can use chip reads when present but must also work without them.
+
 ## 2026-10-26
 
 - `race-services/reports/`: per-race reports for chip-timed races now include start-line density (most start crossings in one second, and how long after the gun 90% of the field had crossed). Finish density adds a 5s window for groups finishing together. `README.md` gains Start Peak (1s) and Finish Peak (5s) columns, the existing Peak (60s) and Peak (15s) columns are renamed Finish Peak (60s) and Finish Peak (15s), and `SUMMARY-LEGEND.md` describes them.
