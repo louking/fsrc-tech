@@ -2,6 +2,12 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-10-31
+
+- `applications/tmtility.md`: the Time Machine client gotcha now describes the hardening in [tm-csv-connector#154](https://github.com/louking/tm-csv-connector/issues/154): a hung open is given up on after 15s and retried, with the scanner client's reconnect loop, link check, and status banner, and the client stops after three hung opens and says to power-cycle. Before it, **Connect** could hang with nothing on the page, and each further click started another reader on the same port. Not in a release yet (as of 1.9.0.dev2).
+- `applications/tmtility.md`: new gotcha saying that clients post to the server one message at a time, which keeps bursts of scans in order, and retry a post, in order, while the server is down or restarting, dropping only a message the server rejects ([tm-csv-connector#163](https://github.com/louking/tm-csv-connector/issues/163)). Before this, a failed post was dropped, and a lost scan shifted every later scan by one. Not in a release yet (as of 1.9.0.dev2).
+- `applications/tmtility.md`: two new gotchas from [tm-csv-connector#157](https://github.com/louking/tm-csv-connector/issues/157). One covers reviewing a race afterwards with the **Results Log** view; before it, analysis of the 2026-10-25 race had to infer operator edits from final bibs that differed from the keypad bib and matched no nearby scan. The other covers device-read times, which need the laptop's time zone to match the install's `TZ` and the clients to have no `TZ` set; a bench test with clients run from the editor logged device times 5 hours ahead. Not in a release yet (as of 1.9.0.dev2).
+
 ## 2026-10-28
 
 - `applications/tmtility.md`: the full-dataset poll gotcha now covers the Use/Ins/Del scan-action buttons as fixed in tm-csv-connector 1.8.3 ([tm-csv-connector#156](https://github.com/louking/tm-csv-connector/issues/156)): polls don't pile up, the buttons act once on press and ignore a press on a changed row, and selecting a row holds the table. Prompted by operator reports at a 2026-10-25 race that the buttons lagged and sometimes needed several presses. A new gotcha says that checks under `filelock` must use locking reads; two failures in bench testing came from plain reads seeing a snapshot taken before the request waited for the lock.
