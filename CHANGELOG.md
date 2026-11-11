@@ -2,6 +2,14 @@
 
 A running log of notable updates to this wiki. Newest entries at the top.
 
+## 2026-11-11
+
+- `applications/tmtility.md`: updated for tm-csv-connector 1.9.0 ([release notes](https://github.com/louking/tm-csv-connector/releases/tag/1.9.0)), which also releases the #154, #157 and #163 changes added 2026-10-31.
+  - New architecture note on the pytest suites ([tm-csv-connector#166](https://github.com/louking/tm-csv-connector/issues/166), [#167](https://github.com/louking/tm-csv-connector/issues/167)): app tests in the app container against a separate test database, a separate simulation-mode run, and client tests in the Windows `.venv`. Before them, each change was checked with a one-off script that was thrown away. The new tests found two races: Clear All could delete a result posted while it waited for the lock without saving it to its snapshot, and the chip reader client could lose a Disconnect clicked just as the connection dropped. The `filelock` gotcha now covers Clear All's snapshot.
+  - New gotcha on the results view's duplicate and unknown bib flags ([tm-csv-connector#158](https://github.com/louking/tm-csv-connector/issues/158)), which are only warnings and never block Confirm. Prompted by a 2026-10-25 race where 17 bibs ended up on two results and 3 results had bibs not in the race, several from keypad entries with dropped digits.
+  - The race-review gotcha now covers the results view's **Undo** for a mistaken **Use** ([tm-csv-connector#161](https://github.com/louking/tm-csv-connector/issues/161)), and why its state is kept on the result row rather than read from the Results Log. Prompted by the same race, where several correct keypad bibs were replaced by accidental Use presses.
+  - The client-restart gotcha now says that `nssm restart` works ([tm-csv-connector#168](https://github.com/louking/tm-csv-connector/issues/168)): 1.9.0 upgraded the Python packages, including PyInstaller 6 and websockets 17, and its clients exit within ~65ms of NSSM's stop; which upgrade changed this isn't known. In 1.8.x, every stop took ~3.4s and `nssm restart` left the service stopped.
+
 ## 2026-10-31
 
 - `applications/tmtility.md`: the Time Machine client gotcha now describes the hardening in [tm-csv-connector#154](https://github.com/louking/tm-csv-connector/issues/154): a hung open is given up on after 15s and retried, with the scanner client's reconnect loop, link check, and status banner, and the client stops after three hung opens and says to power-cycle. Before it, **Connect** could hang with nothing on the page, and each further click started another reader on the same port. Not in a release yet (as of 1.9.0.dev2).

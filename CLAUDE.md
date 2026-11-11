@@ -71,6 +71,8 @@ Architecture notes and gotcha bullets (in `docs/applications/`, `docs/framework/
 
 Architecture notes and gotcha bullets should read as a description of how the system behaves *now*, not a log of how that behavior came to be — dates, "expanded from N to M tests," "first-ever," "hit when doing X," "fixed by doing Y," and commit-hash links are all process narrative that belongs in `CHANGELOG.md` (which is dated for exactly this) rather than on the page itself. This applies to gotchas as much as architecture notes: a gotcha's *trap* and *fix* are what a reader needs, not *when* it was found or how the test count grew. Seen concretely in a site-wide pass (`CHANGELOG.md` 2026-08-16): `applications/scoretility.md`'s Testing bullet read "first-ever `pytest` suite added 2026-08-07... Expanded 2026-08-09... 81 tests total, up from 5" where a final-state description ("covers these modules; `tools.py` isn't importable this way because...") was both shorter and more useful. The same pass also cut narrative from several gotchas that had accreted "a 'security fixes' pass swapped X for Y" / "an initial cut looped until..." framing around what was actually just a fact about current behavior.
 
+Release status is process too: don't tag a gotcha with "not yet released" or "since version X". Describe the behavior and link the issue; if the change isn't in a release yet, say so in the `CHANGELOG.md` entry (e.g. "Not in a release yet (as of 1.9.0.dev2)").
+
 ## License
 
 Written content here is under `LICENSE` (CC BY-SA 4.0) — a documentation license, not a software one. This is separate from and does not apply to the application source code in the individual app repos, which have their own (Apache-2.0) licensing.
